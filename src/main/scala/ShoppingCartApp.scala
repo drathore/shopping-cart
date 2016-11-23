@@ -4,8 +4,13 @@ object ShoppingCartApp extends App{
   print("Shopping cart...........")
   def checkout(shoppingCart: List[String]) : String = {
 
-    val total = shoppingCart.size * 60
-    "£" + total/100.00
+    var sum = 0
+    for (item <- shoppingCart)  item match {
+      case "Apple" => sum = sum + 60
+      case "Orange" => sum = sum + 25
+    }
+
+    "£" + sum/100.00
   }
 
 }
