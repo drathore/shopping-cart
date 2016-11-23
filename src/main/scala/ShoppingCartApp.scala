@@ -14,7 +14,7 @@ object ShoppingCartApp extends App{
 
     val orangeItem = new Item("Orange", itemPrices("Orange"), orangesCount)
 
-    val checkoutTotal = calculateTotalItemPrice(appleItem, new Calculator()) + calculateTotalItemPrice(orangeItem, new Calculator())
+    val checkoutTotal = calculateTotalItemPrice(appleItem, Calculator) + calculateTotalItemPrice(orangeItem, Calculator)
 
     "£" + checkoutTotal/100.00
   }
@@ -37,7 +37,7 @@ trait ItemTotalCalculator {
   def calculate(item: Item) : Int
 }
 
-class Calculator extends ItemTotalCalculator {
+object Calculator extends ItemTotalCalculator {
   override def calculate(item: Item): Int = {
     item.qty * item.price
   }
