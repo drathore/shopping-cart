@@ -19,9 +19,12 @@ object ShoppingCartApp extends App{
     val checkoutTotal = itemsList.map(i => itemPriceCalculator(i.itemType).calculate(i)).reduce( (a, b) => a+ b )
 
 
-    "£" + checkoutTotal/100.00
+    "£" + convertIntoPound(checkoutTotal)
   }
 
+  def convertIntoPound(checkoutTotal: Int): Double = {
+    checkoutTotal / 100.00
+  }
 }
 
 
@@ -33,7 +36,7 @@ trait ItemTotalCalculator {
   def calculate(item: Item) : Int
 }
 
-object Calculator extends ItemTotalCalculator {
+object DefaultItemCalculator extends ItemTotalCalculator {
   override def calculate(item: Item): Int = {
     item.qty * item.price
   }
