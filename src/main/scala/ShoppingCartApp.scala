@@ -16,15 +16,10 @@ object ShoppingCartApp extends App{
 
     val itemsList = List(new Item("Apple", itemPrices("Apple"), applesCount), new Item("Orange", itemPrices("Orange"), orangesCount))
 
-    val checkoutTotal = itemsList.map(i => calculateTotalItemPrice(i, itemPriceCalculator(i.itemType))).reduce( (a, b) => a+ b )
+    val checkoutTotal = itemsList.map(i => itemPriceCalculator(i.itemType).calculate(i)).reduce( (a, b) => a+ b )
 
-//    val checkoutTotal = calculateTotalItemPrice(appleItem, itemPriceCalculator("Apple")) + calculateTotalItemPrice(orangeItem, itemPriceCalculator("Orange"))
 
     "£" + checkoutTotal/100.00
-  }
-
-  def calculateTotalItemPrice(item: Item, calculator: ItemTotalCalculator): Int = {
-    return calculator.calculate(item)
   }
 
 }
