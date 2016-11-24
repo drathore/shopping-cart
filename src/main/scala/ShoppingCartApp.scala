@@ -46,3 +46,9 @@ object Calculator extends ItemTotalCalculator {
     item.qty * item.price
   }
 }
+
+object BOGOCalculator extends ItemTotalCalculator{
+  override def calculate(item: Item): Int = {
+    0
+  }
+}

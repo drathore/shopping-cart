@@ -1,7 +1,7 @@
 package test.scala
 
 import org.scalatest.FunSuite
-import shoppingcart.{ItemTotalCalculator, Calculator, ShoppingCartApp}
+import shoppingcart._
 
 class ShoppingCartApp$Test extends FunSuite {
 
@@ -16,5 +16,11 @@ class ShoppingCartApp$Test extends FunSuite {
     val shoppingCart = List[String]("Apple", "Apple", "Orange", "Apple")
     val itemPriceCalculator: Map[String, ItemTotalCalculator] = Map("Apple" -> Calculator, "Orange" -> Calculator)
     assert(ShoppingCartApp.checkout(shoppingCart, itemPriceCalculator) == "£2.05")
+  }
+
+  test("buy one get one free offer applied on apples") {
+    val shoppingCart = List[String]("Apple", "Apple", "Orange", "Orange")
+    val itemPriceCalculator: Map[String, ItemTotalCalculator] = Map("Apple" -> BOGOCalculator, "Orange" -> Calculator)
+    assert(ShoppingCartApp.checkout(shoppingCart, itemPriceCalculator) == "£1.1")
   }
 }
