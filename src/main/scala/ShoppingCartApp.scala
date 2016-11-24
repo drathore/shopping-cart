@@ -58,6 +58,12 @@ object BOGOCalculator extends ItemTotalCalculator{
 
 object ThreeFor2Calculator extends ItemTotalCalculator {
   override def calculate(item: Item): Int = {
-    0
+    val itemPrice = item.price
+    item.qty match {
+      case x if x < 3 => x * itemPrice
+      case  _ =>  val qR = BigInt(item.qty) /% 3
+        val total: BigInt = ((qR._1 *  2) +  qR._2) * itemPrice
+        total.toInt
+    }
   }
 }
