@@ -3,7 +3,7 @@ package shoppingcart
 object ShoppingCartApp extends App{
 
   print("Shopping cart...........")
-  def checkout(shoppingCart: List[String]) : String = {
+  def checkout(shoppingCart: List[String], itemPriceCalculator: Map[String, ItemTotalCalculator]) : String = {
     val itemPrices: Map[String, Int] = Map( "Apple" -> 60, "Orange" -> 25)
     val applesCount: Int = shoppingCart.count(i => i.equals("Apple"))
 
@@ -14,7 +14,11 @@ object ShoppingCartApp extends App{
 
     val orangeItem = new Item("Orange", itemPrices("Orange"), orangesCount)
 
-    val checkoutTotal = calculateTotalItemPrice(appleItem, Calculator) + calculateTotalItemPrice(orangeItem, Calculator)
+    val itemsList = List(new Item("Apple", itemPrices("Apple"), applesCount), new Item("Orange", itemPrices("Orange"), orangesCount))
+
+    val checkoutTotal = itemsList.map(i => calculateTotalItemPrice(i, itemPriceCalculator(i.itemType))).reduce( (a, b) => a+ b )
+
+//    val checkoutTotal = calculateTotalItemPrice(appleItem, itemPriceCalculator("Apple")) + calculateTotalItemPrice(orangeItem, itemPriceCalculator("Orange"))
 
     "£" + checkoutTotal/100.00
   }

@@ -8,13 +8,13 @@ class ShoppingCartApp$Test extends FunSuite {
   test("shopping cart with only apples calculated correctly") {
     val shoppingCart = List[String]("Apple", "Apple")
 
-//    val itemPriceCalculator: Map[String, ItemTotalCalculator] = Map("Apple", )
-    assert(ShoppingCartApp.checkout(shoppingCart) == "£1.2")
+    val itemPriceCalculator: Map[String, ItemTotalCalculator] = Map("Apple" -> Calculator, "Orange" -> Calculator)
+    assert(ShoppingCartApp.checkout(shoppingCart, itemPriceCalculator) == "£1.2")
   }
 
   test("shopping cart with apples and oranges calculated correctly") {
     val shoppingCart = List[String]("Apple", "Apple", "Orange", "Apple")
-
-    assert(ShoppingCartApp.checkout(shoppingCart) == "£2.05")
+    val itemPriceCalculator: Map[String, ItemTotalCalculator] = Map("Apple" -> Calculator, "Orange" -> Calculator)
+    assert(ShoppingCartApp.checkout(shoppingCart, itemPriceCalculator) == "£2.05")
   }
 }
