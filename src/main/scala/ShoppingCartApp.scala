@@ -24,10 +24,7 @@ object ShoppingCartApp extends App{
   }
 
   def calculateTotalItemPrice(item: Item, calculator: ItemTotalCalculator): Int = {
-
-    val calculate: Int = calculator.calculate(item)
-    print(item.itemType + "===" + calculate)
-    return calculate
+    return calculator.calculate(item)
   }
 
 }
@@ -49,6 +46,12 @@ object Calculator extends ItemTotalCalculator {
 
 object BOGOCalculator extends ItemTotalCalculator{
   override def calculate(item: Item): Int = {
-    0
+    val itemPrice = item.price
+    item.qty match {
+      case x if x < 2 => itemPrice
+      case  _ =>  val qR = BigInt(item.qty) /% 2
+        val total: BigInt = (qR._1 + qR._2) * itemPrice
+        total.toInt
+    }
   }
 }
