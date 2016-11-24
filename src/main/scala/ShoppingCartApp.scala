@@ -55,3 +55,9 @@ object BOGOCalculator extends ItemTotalCalculator{
     }
   }
 }
+
+object ThreeFor2Calculator extends ItemTotalCalculator {
+  override def calculate(item: Item): Int = {
+    0
+  }
+}

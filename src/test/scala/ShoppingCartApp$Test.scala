@@ -23,4 +23,10 @@ class ShoppingCartApp$Test extends FunSuite {
     val itemPriceCalculator: Map[String, ItemTotalCalculator] = Map("Apple" -> BOGOCalculator, "Orange" -> Calculator)
     assert(ShoppingCartApp.checkout(shoppingCart, itemPriceCalculator) == "£1.1")
   }
+
+  test("three for 2 offer applied on oranges") {
+    val shoppingCart = List[String]("Apple", "Apple", "Orange", "Orange", "Orange")
+    val itemPriceCalculator: Map[String, ItemTotalCalculator] = Map("Apple" -> Calculator, "Orange" -> ThreeFor2Calculator)
+    assert(ShoppingCartApp.checkout(shoppingCart, itemPriceCalculator) == "£1.7")
+  }
 }
